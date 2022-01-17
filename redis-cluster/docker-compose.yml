@@ -1,0 +1,76 @@
+version: "3"
+
+services:
+  redis-6371:
+    image: redis
+    container_name: redis-6371
+    restart: always
+    volumes:
+      - ./redis-6371/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6371/data:/data
+    ports:
+      - 6371:6371
+      - 16371:16371
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6372:
+    image: redis
+    container_name: redis-6372
+    volumes:
+      - ./redis-6372/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6372/data:/data
+    ports:
+      - 6372:6372
+      - 16372:16372
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6373:
+    image: redis
+    container_name: redis-6373
+    volumes:
+      - ./redis-6373/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6373/data:/data
+    ports:
+      - 6373:6373
+      - 16373:16373
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+      
+  redis-6374:
+    image: redis
+    container_name: redis-6374
+    restart: always
+    volumes:
+      - ./redis-6374/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6374/data:/data
+    ports:
+      - 6374:6374
+      - 16374:16374
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6375:
+    image: redis
+    container_name: redis-6375
+    volumes:
+      - ./redis-6375/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6375/data:/data
+    ports:
+      - 6375:6375
+      - 16375:16375
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6376:
+    image: redis
+    container_name: redis-6376
+    volumes:
+      - ./redis-6376/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6376/data:/data
+    ports:
+      - 6376:6376
+      - 16376:16376
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
