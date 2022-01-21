@@ -2,6 +2,7 @@ version: '3.7'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
+    container_name: zookeeper
     volumes:
       - ./data:/data
     ports:
@@ -9,6 +10,7 @@ services:
        
   kafka9094:
     image: wurstmeister/kafka
+    container_name: kafka
     ports:
       - 9092:9092
     environment:
