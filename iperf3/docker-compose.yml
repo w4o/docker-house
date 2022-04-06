@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  iperf3:
+    container_name: iperf3
+    restart: always
+    image: networkstatic/iperf3
+    ports:
+      - 5201:5201
+    command: iperf3 -s 
