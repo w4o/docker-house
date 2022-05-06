@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  dmanywhere:
+    image: btpanel/baota:lnmp
+    restart: always
+    container_name: mybaota
+    volumes:
+      - ./website_data:/www/wwwroot
+      - ./mysql_data:/www/server/data 
+      - ./vhost:/www/server/panel/vhost
+    ports:
+        - '8888:8888'
+        - '8022:22'
+        - '8043:443'
+        - '8080:8888'
+        - '3306:3306'
