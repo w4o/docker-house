@@ -1,0 +1,8 @@
+mysql/data/
+mongodb/db/
+nacos/standalone-logs/
+redis/data/
+kafka/kafka-logs/
+nginx/log/
+portainer/portainer-data/
+redis-cluster/redis-*/data/
