@@ -1,0 +1,92 @@
+version: '3'
+# redis 集群（1主2从3哨兵）
+services:
+  # redis-masater
+  redis-server-master:
+    image: redis:5.0.7
+    container_name: redis-server-master
+    restart: always
+    ports:
+      - 6379:6379
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      # configuration and data folder
+      - ./conf/redis-master.conf:/usr/local/etc/redis/redis.conf
+      - ./data/master/:/data:Z
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+  # redis slave 1
+  redis-server-slave-1:
+    image: redis:5.0.7
+    container_name: redis-server-slave-1
+    restart: always
+    ports:
+      - 6380:6380
+    depends_on:
+      - redis-server-master
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      - ./conf/redis-slave1.conf:/usr/local/etc/redis/redis.conf
+      - ./data/slave1/:/data:Z
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+  # redis slave 2
+  redis-server-slave-2:
+    image: redis:5.0.7
+    container_name: redis-server-slave-2
+    restart: always
+    ports:
+      - 6381:6381
+    depends_on:
+      - redis-server-master
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      - ./conf/redis-slave2.conf:/usr/local/etc/redis/redis.conf
+      - ./data/slave2/:/data:Z
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+  # sentinel 1
+  redis-sentinel-1:
+    image: redis:5.0.7
+    container_name: redis-sentinel-1
+    restart: always
+    environment:
+      TZ: "Asia/Shanghai"
+    ports:
+      - 26379:26379
+    depends_on:
+      - redis-server-master
+    volumes:
+      - ./conf/sentinel1.conf:/usr/local/etc/redis/sentinel.conf
+      - ./data/sentinel1/:/data:Z
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+  # sentinel 2
+  redis-sentinel-2:
+    image: redis:5.0.7
+    container_name: redis-sentinel-2
+    restart: always
+    environment:
+      TZ: "Asia/Shanghai"
+    ports:
+      - 26380:26379
+    depends_on:
+      - redis-server-master
+    volumes:
+      - ./conf/sentinel2.conf:/usr/local/etc/redis/sentinel.conf
+      - ./data/sentinel2/:/data:Z
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+  # sentinel 3
+  redis-sentinel-3:
+    image: redis:5.0.7
+    container_name: redis-sentinel-3
+    restart: always
+    environment:
+      TZ: "Asia/Shanghai"
+    ports:
+      - 26381:26379
+    depends_on:
+      - redis-server-master
+    volumes:
+      - ./conf/sentinel3.conf:/usr/local/etc/redis/sentinel.conf
+      - ./data/sentinel3/:/data:Z
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
