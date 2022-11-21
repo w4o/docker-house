@@ -1,0 +1,8 @@
+version: '3'
+services:
+  frpc:
+    image: snowdreamtech/frps:latest
+    restart: always
+    volumes:
+      - ./frps.ini:/etc/frp/frps.ini
+    network_mode: "host"
